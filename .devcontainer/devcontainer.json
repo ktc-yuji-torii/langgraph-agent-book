@@ -1,0 +1,63 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+    "name": "${localWorkspaceFolderBasename}",
+    "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+    // The 'service' property is the name of the service for the container that VS Code should
+    // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+    "service": "devcontainer",
+    // The optional 'workspaceFolder' property is the path VS Code should open by default when
+    // connected. This is typically a file mount in .devcontainer/docker-compose.yml
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "remoteEnv": {
+        "HOST_DIR": "${localWorkspaceFolder}"
+    },
+    // "initializeCommand": "bash .devcontainer/initialize.sh",
+    "postCreateCommand": "bash ../.devcontainer/post-create.sh",
+    // "postAttachCommand": "bash .devcontainer/post-attach.sh ${containerWorkspaceFolder}",
+    "forwardPorts": [8081],
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/python:1": {
+            "installTools": true,
+            "version": "3.11"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "editor.guides.bracketPairs": true,
+                "editor.stickyScroll.enabled": true,
+                "editor.stickyScroll.maxLineCount": 5,
+                "workbench.colorCustomizations": {
+                    "editorStickyScroll.background": "#00708D",
+                    "editorStickyScrollHover.background": "#59A2B5"
+                },
+                "editor.formatOnSave": true
+            },
+            "extensions": [
+                "GitHub.vscode-pull-request-github",
+                "github.vscode-github-actions",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "oderwat.indent-rainbow",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.black-formatter",
+                "ms-python.isort",
+                "ms-python.flake8",
+                "ms-python.debugpy"
+            ]
+        }
+    }
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "uname -a",
+    // Configure tool-specific properties.
+    // "customizations": {},
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
+}
